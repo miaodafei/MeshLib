@@ -18,10 +18,17 @@ int main()
     // 平移
     MR::AffineXf3f xf3f;
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
-    MR::Vector3<float> b(10.0, 0.0, 1.0); // x轴正向平移10单位
+    MR::Vector3<float> b(10.0, 0.0, 0.0); // x轴正向平移10单位
+
+    MR::Vector3<float> b(0.0, 10.0, 0.0); // y轴正向平移10单位
+    MR::Vector3<float> b(0.0, 0.0, 10.0); // z轴正向平移10单位
 
     xf3f = MR::AffineXf3f( A, b);
-    mesh1.transform(xf3f);
+    yf3f = MR::AffineXf3f( A, b);
+    zf3f = MR::AffineXf3f( A, b);
+    //mesh1.transform(xf3f);
+    mesh1.transform(yf3f);
+    //mesh1.transform(zf3f);
 
     // 将两个网格存储在同一个ply中
     mesh1.addPart(mesh2);
