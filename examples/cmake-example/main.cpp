@@ -9,9 +9,9 @@
 int main()
 {
     std::filesystem::path inFilePath1 = "mesh.stl";
-    MR::Mesh mesh1 = MR::MeshLoad::fromAnyStl(inFilePath).value();
+    MR::Mesh mesh1 = MR::MeshLoad::fromAnyStl(inFilePath1).value();
     std::filesystem::path inFilePath2 = "mesh.stl";
-    MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath).value();
+    MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath2).value();
 
     MR::AffineXf3f xf3f;
     Vector3<float> a1(1.0, 0.0, 0.0);
