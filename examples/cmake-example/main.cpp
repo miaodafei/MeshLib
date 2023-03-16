@@ -5,6 +5,7 @@
 #include "MRMesh/MRTorus.h"
 #include "MRMesh/MRMeshLoad.h"
 #include "MRMesh/MRMeshSave.h"
+#include "MRMesh/MRMeshFwd.h"
 #include <iostream>
 
 int main()
@@ -17,26 +18,26 @@ int main()
 
     // 平移
     MR::Box3f box = mesh1.getBoundingBox();
-    // float xDistance = MR::Box<float>::depth(box);
-    // float zDistance = MR::Box<float>::height(box);
-    // float yDistance = MR::Box<float>::width(box);
-    // MR::AffineXf3f xf3f, yf3f, zf3f;
-    // MR::Matrix3<float> A; // 直接用默认的矩阵就行
-    // MR::Vector3<float> bx(xDistance, 0.0, 0.0); // x轴正向平移
-    // MR::Vector3<float> by(0.0, yDistance, 0.0); // y轴正向平移
-    // MR::Vector3<float> bz(0.0, 0.0, zDistance); // z轴正向平移
+    float xDistance = MR::Box<float>::depth(box);
+    float zDistance = MR::Box<float>::height(box);
+    float yDistance = MR::Box<float>::width(box);
+    MR::AffineXf3f xf3f, yf3f, zf3f;
+    MR::Matrix3<float> A; // 直接用默认的矩阵就行
+    MR::Vector3<float> bx(xDistance, 0.0, 0.0); // x轴正向平移
+    MR::Vector3<float> by(0.0, yDistance, 0.0); // y轴正向平移
+    MR::Vector3<float> bz(0.0, 0.0, zDistance); // z轴正向平移
 
-    // xf3f = MR::AffineXf3f( A, bx);
-    // yf3f = MR::AffineXf3f( A, by);
-    // zf3f = MR::AffineXf3f( A, bz);
+    xf3f = MR::AffineXf3f( A, bx);
+    yf3f = MR::AffineXf3f( A, by);
+    zf3f = MR::AffineXf3f( A, bz);
     
-    // mesh1.transform(xf3f);
-    // // mesh1.transform(yf3f);
-    // // mesh1.transform(zf3f);
+    mesh1.transform(xf3f);
+    // mesh1.transform(yf3f);
+    // mesh1.transform(zf3f);
 
-    // // 将两个网格存储在同一个ply中
-    // mesh1.addPart(mesh2);
-    // std::filesystem::path outFilePath = "transform_testy.ply";
-    // auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
+    // 将两个网格存储在同一个ply中
+    mesh1.addPart(mesh2);
+    std::filesystem::path outFilePath = "transform_testy.ply";
+    auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
 }
