@@ -3,22 +3,25 @@
 #include "MRMesh/MRMeshRelax.h"
 #include "MRMesh/MRMeshSubdivide.h"
 #include "MRMesh/MRTorus.h"
+#include "MRMesh/MRMeshLoad.h"
+#include "MRMesh/MRMeshSave.h"
 
 int main()
 {
-    MR::Mesh mesh = MR::makeTorus();
+    std::filesystem::path inFilePath1 = "mesh.stl";
+    MR::Mesh mesh1 = MR::MeshLoad::fromAnyStl(inFilePath);
+    std::filesystem::path inFilePath2 = "mesh.stl";
+    MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath);
 
-    // relax mesh (5 iterations)
-    MR::relax( mesh, {{5}} );
+    MR::AffineXf3f xf3f = MR::AffineXf3f(3.0, 0);
+    mesh1.transform(xf3);
 
-    // subdivide mesh
-    MR::SubdivideSettings props;
-    props.maxDeviationAfterFlip = 0.5f;
-    MR::subdivideMesh( mesh, props );
-
-    // rotate mesh
-    MR::AffineXf3f rotationXf = MR::AffineXf3f::linear( MR::Matrix3f::rotation( MR::Vector3f::plusZ(), MR::PI_F*0.5f ) );
-    mesh.transform( rotationXf );
-
+    if (mesh1.has_value()) {
+        std::filesystem::path outFilePath = "transform_test.ply";
+        auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
+        if ( !saveRes.has_value() )
+            std::cerr << saveRes.error() << "\n";
+    } else
+        std::cerr << loadRes.error() << "\n";
     return 0;
 }
