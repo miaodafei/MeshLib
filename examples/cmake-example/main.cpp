@@ -7,6 +7,7 @@
 #include "MRMesh/MRMeshSave.h"
 #include "MRMesh/MRMeshFwd.h"
 #include <iostream>
+#include <MRBox.h>
 
 int main()
 {
