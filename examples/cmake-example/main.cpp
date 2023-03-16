@@ -17,9 +17,9 @@ int main()
 
     // 平移
     auto box = mesh1.getBoundingBox();
-    float xDistance = MR::Box::depth(box);
-    float zDistance = MR::Box::height(box);
-    float yDistance = MR::Box::width(box);
+    float xDistance = MR::Box<float>::depth(box);
+    float zDistance = MR::Box<float>::height(box);
+    float yDistance = MR::Box<float>::width(box);
     MR::AffineXf3f xf3f, yf3f, zf3f;
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
     MR::Vector3<float> bx(xDistance, 0.0, 0.0); // x轴正向平移10单位
