@@ -8,7 +8,6 @@
 #include "MRMesh/MRMeshFwd.h"
 #include <iostream>
 #include "MRMesh/MRBox.h"
-#include "MRMesh/MathG"
 
 int main()
 {
