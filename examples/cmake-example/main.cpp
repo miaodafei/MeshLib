@@ -20,7 +20,7 @@ int main()
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
     MR::Vector3<float> b(10.0, 0.0, 1.0); // x轴正向平移10单位
 
-    xf3f = MR::AffineXf3f( a1, b);
+    xf3f = MR::AffineXf3f( A, b);
     mesh1.transform(xf3f);
 
     // 保存结果为ply
