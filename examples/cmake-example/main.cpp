@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
 
     // 合并mesh存储在ply中
     mesh1.addPart(mesh2);
-    std::filesystem::path outFilePath = "transform_testz.ply";
+    std::filesystem::path outFilePath = "transform_test.ply";
     auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
 }
