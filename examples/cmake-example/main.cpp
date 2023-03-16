@@ -16,7 +16,7 @@ int main()
     MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath2).value();
 
     // 平移
-    MR::AffineXf3f xf3f;
+    MR::AffineXf3f xf3f, yf3f, zf3f;
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
     MR::Vector3<float> b(10.0, 0.0, 0.0); // x轴正向平移10单位
 
@@ -32,7 +32,7 @@ int main()
 
     // 将两个网格存储在同一个ply中
     mesh1.addPart(mesh2);
-    std::filesystem::path outFilePath = "transform_test.ply";
+    std::filesystem::path outFilePath = "transform_testy.ply";
     auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
 }
