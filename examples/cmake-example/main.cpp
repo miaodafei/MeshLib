@@ -9,27 +9,22 @@
 
 int main()
 {
+    // 加载stl文件
     std::filesystem::path inFilePath1 = "mesh.stl";
     MR::Mesh mesh1 = MR::MeshLoad::fromAnyStl(inFilePath1).value();
     std::filesystem::path inFilePath2 = "mesh.stl";
     MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath2).value();
 
+    // 平移
     MR::AffineXf3f xf3f;
-    MR::Vector3<float> a1(1.0, 0.0, 0.0);
-    MR::Vector3<float> a2(0.0, 1.0, 0.0);
-    MR::Vector3<float> a3(0.0, 0.0, 1.0);
-    MR::Vector3<float> b(10.0, 0.0, 1.0);
+    MR::Matrix3<float> A; // 直接用默认的矩阵就行
+    MR::Vector3<float> b(10.0, 0.0, 1.0); // x轴正向平移10单位
 
     xf3f = MR::AffineXf3f( a1, b);
-
     mesh1.transform(xf3f);
 
-    if (mesh1.has_value()) {
-        std::filesystem::path outFilePath = "transform_test.ply";
-        auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
-        if ( !saveRes.has_value() )
-            std::cerr << saveRes.error() << "\n";
-    } else
-        std::cerr << loadRes.error() << "\n";
+    // 保存结果为ply
+    std::filesystem::path outFilePath = "transform_test.ply";
+    auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
 }
