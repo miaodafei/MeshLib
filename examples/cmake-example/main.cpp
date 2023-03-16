@@ -23,7 +23,8 @@ int main()
     xf3f = MR::AffineXf3f( A, b);
     mesh1.transform(xf3f);
 
-    // 保存结果为ply
+    // 将两个网格存储在同一个ply中
+    mesh1.addPart(mesh2);
     std::filesystem::path outFilePath = "transform_test.ply";
     auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
