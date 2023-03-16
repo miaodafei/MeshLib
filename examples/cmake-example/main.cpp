@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
     yf3f = MR::AffineXf3f( A, by);
     zf3f = MR::AffineXf3f( A, bz);
 
-    int choice = argv[2];
+    int choice = std::stoi(argv[2]);
 
     switch (choice)
     {
