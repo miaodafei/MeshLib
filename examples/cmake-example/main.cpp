@@ -16,10 +16,10 @@ int main()
     MR::Mesh mesh2 = MR::MeshLoad::fromAnyStl(inFilePath2).value();
 
     // 平移
-    MR::Box3f box = mesh1.getBoundingBox();
-    float xDistance = MR::depth(box);
-    float zDistance = MR::height(box);
-    float yDistance = MR::width(box);
+    auto box = mesh1.getBoundingBox();
+    float xDistance = MR::Box::depth(box);
+    float zDistance = MR::Box::height(box);
+    float yDistance = MR::Box::width(box);
     MR::AffineXf3f xf3f, yf3f, zf3f;
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
     MR::Vector3<float> bx(xDistance, 0.0, 0.0); // x轴正向平移10单位
