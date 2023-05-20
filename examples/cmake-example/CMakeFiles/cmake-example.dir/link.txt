@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/cmake-example.dir/main.cpp.o  -o cmake-example  -Wl,-rpath,/./usr/local/lib/MeshLib /./usr/local/lib/MeshLib/libMRMesh.so 

@@ -24,15 +24,17 @@ int main(int argc, char const *argv[])
     float yDistance = MR::height(box);
     float xDistance = MR::width(box);
     std::cout << " x:" << xDistance << " y: " << yDistance << " z: " << zDistance << std::endl;
-    MR::AffineXf3f xf3f, yf3f, zf3f;
+    MR::AffineXf3f xf3f, yf3f, zf3f, center;
     MR::Matrix3<float> A; // 直接用默认的矩阵就行
     MR::Vector3<float> bx(xDistance, 0.0, 0.0); // x轴正向平移
     MR::Vector3<float> by(0.0, yDistance, 0.0); // y轴正向平移
     MR::Vector3<float> bz(0.0, 0.0, zDistance); // z轴正向平移
+    MR::Vector3<float> bcenter(-xDistance/2, -yDistance/2, -zDistance/2); // z轴正向平移
 
     xf3f = MR::AffineXf3f( A, bx);
     yf3f = MR::AffineXf3f( A, by);
     zf3f = MR::AffineXf3f( A, bz);
+    center = MR::AffineXf3f( A, bcenter);
 
     int choice = std::stoi(argv[2]);
 
@@ -47,13 +49,16 @@ int main(int argc, char const *argv[])
     case 2:
         mesh1.transform(zf3f);
         break;
+    case 3:
+	mesh1.transform(center);
+	break;
     
     default:
         break;
     }
 
     // 合并mesh存储在ply中
-    mesh1.addPart(mesh2);
+    //mesh1.addPart(mesh2);
     std::filesystem::path outFilePath = "transform_test.ply";
     auto saveRes = MR::MeshSave::toPly(mesh1, outFilePath);
     return 0;
